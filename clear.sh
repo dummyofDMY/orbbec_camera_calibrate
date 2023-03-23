@@ -1,0 +1,2 @@
+rm imgs/*.jpg
+
