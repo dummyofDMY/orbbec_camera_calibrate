@@ -4,8 +4,9 @@
 #include<vector>
 #include<fstream>
 
-#define BOARD_COL 11
-#define BOARD_ROW 8
+#define BOARD_COL 11 //棋盘格列数
+#define BOARD_ROW 8 //棋盘格行数
+#define SIDE_LENGTH 0.025 //格子边长，单位：m
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
         std::stringstream buffer;
         buffer << "../imgs/" << count << ".jpg";
         cv::Mat im = cv::imread(buffer.str());
+        ++count;
         if (im.empty()) {
             // std::cout << "Success in loading " << count << "picture" << std::endl;
             break;
@@ -28,13 +30,12 @@ int main()
             // std::cout << "This image is invalid" << std::endl;
             continue;
         }
-        ++count;
         // std::cout << "Success in finding chessboard corners in im" << count << std::endl;
         im_points.push_back(corners);
         std::vector<cv::Point3f> obj_pt;
         for (int i = 0; i < BOARD_ROW; ++i) {
             for (int j = 0; j < BOARD_COL; ++j) {
-                obj_pt.push_back(cv::Point3f(i, j, 0));
+                obj_pt.push_back(cv::Point3f(i * SIDE_LENGTH, j * SIDE_LENGTH, 0));
             }
         }
         obj_points.push_back(obj_pt);
