@@ -48,7 +48,7 @@ int main()
     std::vector<cv::Mat> rvecs, tvecs, rmat;
     cv::Mat cam_deviation, dist_deviation;
     std::vector<double> error;
-    cv::calibrateCamera(obj_points, im_points, im_size, cam_mat, dist, rvecs, tvecs, cam_deviation, dist_deviation, error);
+    cv::calibrateCamera(obj_points, im_points, im_size, cam_mat, dist, rvecs, tvecs, cam_deviation, dist_deviation, error, 0, cv::TermCriteria(cv::TermCriteria::Type::COUNT + cv::TermCriteria::Type::EPS, 50, 1e-12));
     std::stringstream buffer;
     buffer << "Camera Matrix =\n";
     for (int i = 0; i < 3; ++i) {
